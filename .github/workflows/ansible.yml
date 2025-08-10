@@ -1,0 +1,25 @@
+name: Provision of EC2 Instance with Ansible and configuration 
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    provision_of_ec2:
+        runs-on: ubuntu-lastest
+        steps:
+            - name: Checkout repoepository
+              uses: actions/checkout@v2
+
+
+            - name: Set up Python 3.x
+              uses: actions/setup-python@v2
+              with:
+                python-version: "3.10"
+            
+            - name: Install dependenines
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install ansible boto3
+                  ansible-galaxy collection install amazon.aws
