@@ -20,7 +20,7 @@
 - name: Copy source code
   become: true
   synchronize:
-    src: "{{ playbooks_dir }}/../../"
+    src: "{{ playbook_dir }}/../../"
     dest: "/opt/todo"
     mode: push
     recursive: true
