@@ -20,10 +20,8 @@
 - name: Copy source code
   become: true
   synchronize:
-    src: "{{ playbook_dir }}/../../"
+    src: "~/ansible-demo/todo/"
     dest: "/opt/todo"
-    mode: push
-    delete: true
     recursive: true
     rsync_opts:
       - "--exclude=.git"
