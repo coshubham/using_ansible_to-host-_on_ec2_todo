@@ -5,3 +5,8 @@
   roles:
     - ec2_launch
 
+- name: Configuration EC2 instance
+  hosts: ec2_instances
+  gather_facts: true
+  roles:
+    - common
