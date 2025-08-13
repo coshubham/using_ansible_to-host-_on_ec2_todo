@@ -1,11 +1,12 @@
 ---
+
 # tasks file for backend
 
-- name: Install backend packages
+- name: Install backend packages using npm install
   become: true
-  npm: 
-  path: /opt/todo/todo-backend
-  state: present
+  command: npm install
+  args:
+    chdir: /opt/todo/todo-backend
 
 - name: install PM2 globally
   become: true
@@ -16,9 +17,8 @@
 
 - name: check if start.js is there
   stat:
-   path: /opt/todo/todo-backend/start.js
+    path: /opt/todo/todo-backend/start.js
   register: start_js
-
 
 - name: debugging start.js
   debug:
@@ -44,5 +44,3 @@
 - name: set pm2 to start on boot
   become: true
   command: pm2 startup
-  args:
-    chdir: /opt/todo/todo-backend
