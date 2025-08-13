@@ -5,18 +5,9 @@
   become: true
   package:
     name:
-    - httpd
     - nodejs
     - npm
     state: present
-
-
-- name: start httpd service
-  become: true
-  service:
-    name: httpd
-    state: started
-    enabled: true 
 
 - name: Copy source code
   become: true
@@ -35,8 +26,8 @@
   copy:
     dest: /opt/todo/todo-backend/.env
     content: |
+      MONGO_URI="mongodb+srv://devops:devops@todoappdb.dlaxmqe.mongodb.net/?retryWrites=true&w=majority&appName=TodoAppDB"    
       PORT=3001
-      DB_HOST=mongodb+srv://devops:devops@todoappdb.dlaxmqe.mongodb.net/?retryWrites=true&w=majority&appName=TodoAppDB
     owner: root
     group: root
     mode: '0644'
