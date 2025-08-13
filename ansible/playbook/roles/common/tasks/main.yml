@@ -28,6 +28,7 @@
       - "--exclude=.git"
       - "--exclude=.github"
       - "--exclude=ansible"
+      - "--include=.env"
 
 - debug:
     var: playbook_dir
