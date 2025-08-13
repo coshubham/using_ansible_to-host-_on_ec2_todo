@@ -28,7 +28,9 @@
       - "--exclude=.git"
       - "--exclude=.github"
       - "--exclude=ansible"
-      - "--include=.env"
+      - "--include=todo-backend/"
+      - "--include=todo-backend/.env"
+      - "--exclude=*"
 
 - debug:
     var: playbook_dir
