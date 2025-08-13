@@ -25,7 +25,7 @@
 
 - name: Start the backend application with PM2
   become: true
-  command: "pm2 start -f start.js --name backend"
+  command: "pm2 start start.js --env production"
   args:
     chdir: /opt/todo/todo-backend
   when: start_js.stat.exists
