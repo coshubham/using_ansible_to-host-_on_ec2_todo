@@ -28,9 +28,15 @@
       - "--exclude=.git"
       - "--exclude=.github"
       - "--exclude=ansible"
-      - "--include=todo-backend/"
-      - "--include=todo-backend/.env"
-      - "--exclude=*"
+
+- name: Copy .env file from todo-backend
+  copy:
+    src: "{{ playbook_dir }}/../../todo-backend/.env"
+    dest: "/opt/todo/todo-backend/.env"
+    owner: root
+    group: root
+    mode: '0644'
+
 
 - debug:
     var: playbook_dir
