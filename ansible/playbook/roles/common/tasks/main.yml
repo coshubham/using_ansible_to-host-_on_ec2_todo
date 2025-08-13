@@ -1,5 +1,6 @@
 ---
 # tasks file for common
+
 - name: install common packages
   become: true
   package:
@@ -29,14 +30,16 @@
       - "--exclude=.github"
       - "--exclude=ansible"
 
-- name: Copy .env file from todo-backend
+- name: Create .env file on remote without variables
+  become: true
   copy:
-    src: "{{ playbook_dir }}/../../todo-backend/.env"
-    dest: "/opt/todo/todo-backend/.env"
+    dest: /opt/todo/todo-backend/.env
+    content: |
+      PORT=3001
+      DB_HOST=mongodb+srv://devops:devops@todoappdb.dlaxmqe.mongodb.net/?retryWrites=true&w=majority&appName=TodoAppDB
     owner: root
     group: root
     mode: '0644'
-
 
 - debug:
     var: playbook_dir
