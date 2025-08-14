@@ -1,2 +1,54 @@
----
 # tasks file for frontend
+
+- name: Install frontend packages using npm install
+  become: true
+  command: npm install
+  args:
+    chdir: /opt/todo/todo-frontend
+
+- name: Build frontend application
+  become: true
+  command: npm run build
+  args:
+    chdir: /opt/todo/todo-frontend
+
+- name: Install PM2 globally
+  become: true
+  npm:
+    name: pm2
+    global: true
+    state: present
+
+- name: Check if package.json exists
+  stat:
+    path: /opt/todo/todo-frontend/package.json
+  register: package_json
+
+- name: Debug package.json existence
+  debug:
+    msg: "package.json exists: {{ package_json.stat.exists }}"
+
+- name: Start the frontend application with PM2
+  become: true
+  command: pm2 start npm --name todo-frontend -- start
+  args:
+    chdir: /opt/todo/todo-frontend
+  when: package_json.stat.exists
+
+- name: Save PM2 process list
+  become: true
+  command: pm2 save
+
+- name: Set PM2 to start on boot (startup)
+  become: true
+  command: pm2 startup systemd
+
+- name: Show PM2 process list
+  become: true
+  command: pm2 list
+  register: pm2_list
+  changed_when: false
+
+- name: Debug PM2 list
+  debug:
+    var: pm2_list.stdout_lines
