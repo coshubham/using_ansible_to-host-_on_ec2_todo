@@ -36,21 +36,23 @@
   register: ec2_instances
 
 
-- name: Wait for instance to be ready
-  wait_for: 
-    host: "{{ ec2_instances.instances[0].public_dns_name }}"
+- name: Wait for instances to be ready
+  wait_for:
+    host: "{{ item.public_dns_name }}"
     port: 22
     delay: 30
     timeout: 300
     state: started
+  loop: "{{ ec2_instances.instances }}"
   when: ec2_instances is defined and ec2_instances.instances | length > 0
 
-- name: Add the Ec2 instance to the Ansible inventory
+- name: Add the EC2 instances to the Ansible inventory
   add_host:
-    name: "{{ ec2_instances.instances[0].public_dns_name }}"
+    name: "{{ item.public_dns_name }}"
     group: ec2_instances
     ansible_ssh_private_key_file: "{{ ec2_key_path }}"
     ansible_user: ec2-user
+  loop: "{{ ec2_instances.instances }}"
 
 
 - name: Debug ssh key path
