@@ -12,7 +12,7 @@
 
 * The frontend (React) and backend (Express + MongoDB) are deployed and run seamlessly on the remote machine.
 
-* # All of this is controlled from the local machine using Ansible playbooks, triggered via GitHub Actions. This setup enables deployment to multiple EC2 instances (e.g.,i was launched 11 EC2 (it take 16 minutes 5 seconds) at once) without opening a single remote terminal session.
+* # All of this is controlled from the local machine using Ansible playbooks, triggered via GitHub Actions. This setup enables deployment to multiple EC2 instances (e.g.,i was launched 11 EC2 at once) without opening a single remote terminal session.
 
 * In short, this project showcases a fully automated, zero-manual-intervention deployment pipeline for a full-stack application — from provisioning the server to running the application with a database in the cloud.
 
