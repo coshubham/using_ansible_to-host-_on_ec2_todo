@@ -4,6 +4,13 @@
   args:
     chdir: /opt/todo/todo-frontend
 
+- name: Replace localhost with EC2 public IP in config.js
+  become: true
+  replace:
+    path: /opt/todo/todo-frontend/src/config/config.js
+    regexp: 'localhost'
+    replace: '{{ ansible_host }}'
+
 - name: Build frontend
   become: true
   command: npm run build
