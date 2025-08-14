@@ -22,7 +22,7 @@ const TodoList = () => {
 
        const addTodo = async(title) =>{
               try {
-                     const response = await fetch(`http://localhost:3001/api/add-todo`, {
+                     const response = await fetch(`${BACKEND_URL}/add-todo`, {
                             method: "POST",
                             headers: {
                                    "Content-Type": "application/json"
@@ -40,7 +40,7 @@ const TodoList = () => {
 
        const deleteTodo = async (id) => {
               try {
-                const response = await fetch(`http://localhost:3001/api/delete-todo/${id}`, {
+                const response = await fetch(`${BACKEND_URL}/delete-todo/${id}`, {
                   method: "DELETE",
                 });
             
