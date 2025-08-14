@@ -1,9 +1,11 @@
 - name: Install frontend packages
+  become: true
   command: npm install
   args:
     chdir: /opt/todo/todo-frontend
 
 - name: Build frontend
+  become: true
   command: npm run build
   args:
     chdir: /opt/todo/todo-frontend
