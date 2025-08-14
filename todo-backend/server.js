@@ -1,23 +1,30 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const Todo = require('./models/todoModel'); // Import the Todo model
+const path = require('path');
 const dotenv = require('dotenv');
-const connectDB = require('./db_connt'); // Import the connectDB function
-const todoRoutes = require('./routes/todoRoutes'); // Import the todo routes
+
+const Todo = require('./models/todoModel');
+const connectDB = require('./db_connt');
+const todoRoutes = require('./routes/todoRoutes');
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
+app.use(express.json()); // ✅ Only one JSON parser
 
-app.use('/api', todoRoutes); // Use the todo routes
+// API routes
+app.use('/api', todoRoutes);
 
+// Serve frontend build folder
+app.use(express.static(path.join(__dirname, '../todo-frontend/build')));
 
+// ✅ Catch-all route for React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../todo-frontend/build', 'index.html'));
+});
 
+// Connect DB
 connectDB();
-module.exports = app; // Export the app for testing
 
-// app.use()
+module.exports = app;
