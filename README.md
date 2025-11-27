@@ -31,4 +31,4 @@
 * ✅ Simultaneous deployment to multiple EC2 instances
 * ✅ No need to manually log in to any remote server
 * ✅ Full-stack application with CRUD operations for tasks
-* ✅ REST API-based backend integration.
+* ✅ REST API-based backend integration
