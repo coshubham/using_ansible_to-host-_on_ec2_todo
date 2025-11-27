@@ -31,7 +31,7 @@
     region: "{{ aws_region }}"
     instance_type: "{{ ec2_instance_type }}"
     image_id: "{{ ec2_ami_id }}"
-    count: 11
+    count: 1
     security_group: "{{ security_group.group_id }}"
   register: ec2_instances
 
